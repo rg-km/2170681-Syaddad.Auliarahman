@@ -12,7 +12,7 @@ type Todos struct {
 }
 
 func (todos *Todos) Add(item Item) {
-	// TODO: answer hereTEST
+	// TODO: answer hereTESTYoooo
 }
 
 func (todos *Todos) GetAll() []Item {
