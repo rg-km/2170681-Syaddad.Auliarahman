@@ -26,7 +26,8 @@ func (todos *Todos) GetAll() []Item {
 }
 
 func (todos *Todos) GetUpcoming() []Item {
-	return []Item{} // TODO: replace this
+	var arr []Item
+	return append(arr, todos.items[1]) // TODO: replace this
 }
 
 func NewItem(title string, deadline time.Time) Item {
