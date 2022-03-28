@@ -12,11 +12,17 @@ type Todos struct {
 }
 
 func (todos *Todos) Add(item Item) {
-	// TODO: answer hereTESTYoooowwww
+	// TODO: answer here
+	todos.items = append(todos.items, item)
 }
 
 func (todos *Todos) GetAll() []Item {
-	return []Item{} // TODO: replace this
+	var arr []Item
+
+	for _, items := range todos.items {
+		arr = append(arr, items)
+	}
+	return arr // TODO: replace this
 }
 
 func (todos *Todos) GetUpcoming() []Item {
