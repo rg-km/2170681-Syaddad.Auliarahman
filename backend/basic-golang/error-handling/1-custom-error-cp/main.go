@@ -10,14 +10,27 @@ import (
 
 // TODO: answer here
 
+type namaError struct {
+	errorApa  string
+	errorKode int32
+}
+
+func (pointerError *namaError) Error() string {
+	return fmt.Sprintf("error %d: %s", pointerError.errorKode, pointerError.errorApa)
+}
+
 func GetAge(data map[string]int, name string) (int, error) {
 	if _, ok := data[name]; !ok {
 		return 0, errors.New("Data not found")
 	}
 
 	if data[name] < 0 {
-		// Isilah baris ini dengan return 0 dan custom error yang telah dibuat
+		// Isilah baris ini dengan return 0 dan custom error yang telah dibuat dengan message error invalid data dan errCode 500
 		// TODO: answer here
+		return 0, &namaError{
+			errorApa:  fmt.Sprintf("error invalid data"),
+			errorKode: 500,
+		}
 	}
 
 	return data[name], nil
