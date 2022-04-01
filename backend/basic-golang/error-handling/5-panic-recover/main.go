@@ -15,7 +15,7 @@ func division(first, second int) int {
 func divisionWithRecover(first, second int) int {
 	defer func() {
 		if v := recover(); v != nil {
-			fmt.Println(v)
+			fmt.Println("rapopo", v)
 		}
 	}()
 
@@ -24,14 +24,14 @@ func divisionWithRecover(first, second int) int {
 
 func main() {
 	// Ketika kita tidak memberikan recover pada panic, maka program akan segera berhenti
-	for {
-		fmt.Println(division(1, 0))
-		time.Sleep(time.Second * 1)
-	}
-
-	// Ketika kita memberikan recover pada panic, program akan terus berjalan (uncomment infinite loop dibawah dan comment infinite loop diatas untuk mencobanya!)
 	// for {
-	// 	fmt.Println(divisionWithRecover(1, 0))
+	// 	fmt.Println(division(1, 0))
 	// 	time.Sleep(time.Second * 1)
 	// }
+
+	//Ketika kita memberikan recover pada panic, program akan terus berjalan (uncomment infinite loop dibawah dan comment infinite loop diatas untuk mencobanya!)
+	for {
+		fmt.Println(divisionWithRecover(1, 0))
+		time.Sleep(time.Second * 1)
+	}
 }
