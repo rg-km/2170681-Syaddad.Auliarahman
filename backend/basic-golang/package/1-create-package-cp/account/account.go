@@ -6,9 +6,9 @@ type Account struct {
 	Balance int
 }
 
-func (a Account) GetBalance() int {
+func (x Account) GetBalance() int {
 	// TODO: answer here
-	return a.Balance
+	return x.Balance
 }
 
 func (a *Account) Deposit(amount int) {
