@@ -26,16 +26,23 @@ func main() {
 
 func printBook(i int) {
 	// TODO: answer here
+	for {
+		deferring()
+		books := []string{
+			"The Eye of the World",
+			"The Great Hunt",
+			"The Dragon Reborn",
+		}
 
-	books := []string{
-		"The Eye of the World",
-		"The Great Hunt",
-		"The Dragon Reborn",
+		fmt.Printf("%v. Books  is: %v \n", i, books[i])
 	}
-
-	fmt.Printf("%v. Books  is: %v \n", i, books[i])
 }
 
 func deferring() {
 	// TODO: answer here
+	defer func() {
+		if x := recover(); x != nil {
+			fmt.Println("Panic error terdeteksi:", x)
+		}
+	}()
 }
