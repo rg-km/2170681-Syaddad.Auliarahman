@@ -10,7 +10,23 @@ import "fmt"
 
 func GetMenu() []map[string]interface{} {
 	var menu []map[string]interface{}
+	// menu[0]["Nama"] = "ayam goreng"
+	// menu[0]["Jenis"] = "Cepat Saji"
+	// menu[0]["Harga"] = 20000
 
+	// menu[1]["Nama"] = "Cola"
+	// menu[1]["Jenis"] = "Minuman"
+	// menu[1]["Harga"] = 7000
+
+	menu = append(menu, map[string]interface{}{
+		"Nama":  "Ayam Goreng",
+		"Jenis": "Cepat saji",
+		"Harga": 20000,
+	}, map[string]interface{}{
+		"Nama":  "Cola",
+		"Jenis": "Minuman",
+		"Harga": 7000,
+	})
 	// TODO: answer here
 
 	return menu
