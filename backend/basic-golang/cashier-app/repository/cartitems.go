@@ -7,7 +7,7 @@ import (
 )
 
 type CartItemRepository struct {
-	db db.DB
+	db db.DB // konektornya dari si db
 }
 
 func NewCartItemRepository(db db.DB) CartItemRepository {
@@ -65,22 +65,58 @@ func (u *CartItemRepository) Save(cartItems []CartItem) error {
 }
 
 func (u *CartItemRepository) SelectAll() ([]CartItem, error) {
-	return []CartItem{}, nil // TODO: replace this
+	//return []CartItem{}, nil
+	return u.LoadOrCreate()
 }
 
 func (u *CartItemRepository) Add(product Product) error {
-	cartItems, err := u.LoadOrCreate()
+	carts, err := u.LoadOrCreate()
 	if err != nil {
 		return err
 	}
 
-	return nil // TODO: replace this
+	flag := false
+
+	for i := 0; i < len(carts); i++ {
+		if carts[i].ProductName == product.ProductName {
+			flag = true
+			carts[i].Quantity++
+			return u.Save(carts)
+		}
+	}
+
+	if flag == false {
+		carts = append(carts, CartItem{
+			Category:    product.Category,
+			ProductName: product.ProductName,
+			Price:       product.Price,
+			Quantity:    1,
+		})
+	}
+
+	return u.Save(carts)
 }
 
 func (u *CartItemRepository) ResetCartItems() error {
-	return nil // TODO: replace this
+	records := [][]string{
+		{"category", "product_name", "price", "quantity"},
+	}
+	return u.db.Save("cart_items", records)
+	// return nil // TODO: replace this
 }
 
 func (u *CartItemRepository) TotalPrice() (int, error) {
-	return 0, nil // TODO: replace this
+
+	carts, err := u.LoadOrCreate()
+	if err != nil {
+		return 0, err
+	}
+
+	totalPrice := 0
+
+	for _, cart := range carts {
+		totalPrice += (cart.Quantity * cart.Price)
+	}
+
+	return totalPrice, nil
 }
