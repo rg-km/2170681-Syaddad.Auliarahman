@@ -13,6 +13,7 @@ func CSVRead() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	//fmt.Println(f)
 
 	r := csv.NewReader(f)
 
@@ -26,7 +27,7 @@ func CSVRead() {
 			log.Fatal(err)
 		}
 		for value := range record {
-			fmt.Printf("%s\n", record[value])
+			fmt.Printf("%s ", record[value])
 		}
 	}
 }
