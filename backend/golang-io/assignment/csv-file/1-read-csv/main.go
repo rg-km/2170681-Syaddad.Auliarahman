@@ -9,10 +9,14 @@ func main() {
 	CSVRead()
 	data, err := CSVReadAll()
 	if err != nil {
+		fmt.Println(" ", err)
 		log.Fatal(err)
-	}
 
-	for _, record := range data {
+	}
+	//fmt.Println(data)
+
+	for x, record := range data {
+		fmt.Println(x)
 		user := Person{
 			FirstName: record[0],
 			LastName:  record[1],
