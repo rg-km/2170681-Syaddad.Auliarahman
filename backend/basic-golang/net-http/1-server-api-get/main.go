@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 )
 
 type Table struct {
@@ -22,11 +23,12 @@ func tables(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		// encode data ke dalam format string JSON
 		result, err := json.MarshalIndent(data, "", "\t")
+		fmt.Println(result, err)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-
+		//w.Write(result)
 		// untuk mendaftarkan result sebagai response
 		w.Write(result)
 		return
@@ -44,6 +46,22 @@ func table(w http.ResponseWriter, r *http.Request) {
 		// untuk mengambil value yang dikirim oleh client dengan key `id`
 		id := r.FormValue("id")
 
+		tipe := r.FormValue("type")
+
+		for _, table2 := range data {
+			if table2.Type == tipe {
+				result, err := json.Marshal(table2)
+
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusInternalServerError)
+					return
+				}
+
+				w.Write(result)
+				return
+			}
+		}
+
 		// validate table id yang sesuai dengan id yang dikirim client
 		for _, table := range data {
 			if table.ID == id {
@@ -59,10 +77,29 @@ func table(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 		}
+		total := r.FormValue("total")
+		intTotal, _ := strconv.Atoi(total)
+		var resultAll []Table
+		for _, table := range data {
+			if table.Total == intTotal {
+				resultAll = append(resultAll, table)
+			}
+		}
+		result, err := json.Marshal(resultAll)
+		if err != nil {
+			http.Error(w, "invalid total", http.StatusInternalServerError)
+			return
+		}
+		if len(resultAll) > 0 {
+			w.WriteHeader(http.StatusOK)
+			w.Write(result)
+			return
+		}
 
 		// kembalikan response not found jika data yang diinput client tidak ditemukan
 		http.Error(w, "Table not found", http.StatusNotFound)
 		return
+
 	}
 
 	http.Error(w, "", http.StatusBadRequest)
