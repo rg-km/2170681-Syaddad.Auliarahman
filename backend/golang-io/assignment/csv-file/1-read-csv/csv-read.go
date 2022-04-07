@@ -17,17 +17,21 @@ func CSVRead() {
 
 	r := csv.NewReader(f)
 
-	for {
-		record, err := r.Read()
-		if err == io.EOF {
-			break
-		}
-
-		if err != nil {
-			log.Fatal(err)
-		}
-		for value := range record {
-			fmt.Printf("%s ", record[value])
-		}
+	//for {
+	record, err := r.Read()
+	if err == io.EOF {
+		fmt.Println("\nthis is the End Of File")
+		//break
 	}
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	for value := range record {
+		fmt.Print(value)
+		fmt.Printf("%s ", record[value])
+	}
+	//}
+	f.Close()
+	//defer f.Close()
 }
