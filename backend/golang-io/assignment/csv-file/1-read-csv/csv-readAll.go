@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/csv"
-	"fmt"
 	"os"
 )
 
@@ -21,10 +20,9 @@ func CSVReadAll() ([][]string, error) {
 	defer f.Close()
 
 	r := csv.NewReader(f)
+
 	// skip baris pertama (nama kolom)
-	if x, err := r.Read(); err != nil {
-		fmt.Println(x)
-		fmt.Println(err)
+	if _, err := r.Read(); err != nil {
 		return [][]string{}, err
 	}
 

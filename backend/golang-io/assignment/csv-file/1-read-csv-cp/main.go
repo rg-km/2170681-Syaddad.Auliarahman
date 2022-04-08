@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/csv"
 	"fmt"
+	"io"
 	"os"
 )
 
@@ -10,31 +11,26 @@ func main() {
 	fmt.Print("dummy commit")
 }
 
-type Questions struct {
-	quest string
-	ans   string
-}
-
 func CSVToMap(data map[string]string, fileName string) (map[string]string, error) {
 	// TODO: answer here
-	f, err := os.Open("questions.csv")
+	f, err := os.Open(fileName)
 	if err != nil {
-		return data, err
+		return nil, err
 	}
 	defer f.Close()
-	rdr := csv.NewReader(f)
 
-	if _, err := rdr.Read(); err != nil {
-		return data, err
-	}
+	r := csv.NewReader(f)
 
-	data1, err := rdr.ReadAll()
-	if err != nil {
-		return data, err
-	}
-	for _, record := range data1 {
+	for {
+		record, err := r.Read()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return nil, err
+		}
 		data[record[0]] = record[1]
 	}
-	return data, nil
 
+	return data, nil
 }

@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/csv"
-	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -34,9 +33,6 @@ func main() {
 	// Using Write
 	for _, record := range records {
 		row := []string{record.ID, strconv.Itoa(record.Age)}
-		fmt.Println("", row)
-		//fmt.Println(record)
-		//fmt.Println(record.ID)
 		if err := csvWriter.Write(row); err != nil {
 			log.Fatalln("error writing record to file", err)
 		}
