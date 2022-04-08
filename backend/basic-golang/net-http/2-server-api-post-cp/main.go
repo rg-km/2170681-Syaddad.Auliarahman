@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -56,6 +57,23 @@ func TablesHandler(w http.ResponseWriter, r *http.Request) {
 	// logic handle POST request
 	if r.Method == "POST" {
 		// TODO: answer here
+		var t []Table
+
+		body, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			http.Error(w, fmt.Sprint("read body error: ", err.Error()), http.StatusInternalServerError)
+			return
+		}
+
+		log.Println(string(body))
+
+		err = json.Unmarshal(body, &t)
+		if err != nil {
+			http.Error(w, fmt.Sprint("JSON encode error: ", err.Error()), http.StatusInternalServerError)
+			return
+		}
+
+		data = append(data, t...)
 
 		// set header response code with status created/201
 		w.WriteHeader(http.StatusCreated)
