@@ -34,9 +34,33 @@ import (
 */
 
 // TODO: answer here
+type Ruang struct {
+	RuangTamu Items `json:"ruangTamu"`
+}
+
+type Ukuran struct {
+	Panjang string `json:"panjang"`
+	Tinggi  string `json:"tinggi"`
+}
+
+type Meja struct {
+	Nama   string `json:"nama"`
+	Jumlah int    `json:"jumlah"`
+	Warna  string `json:"warna"`
+	Ukuran Ukuran `json:"ukuran"`
+}
+
+type Items struct {
+	Items []Meja `json:"items"`
+}
 
 func (r Ruang) EncodeJSON() string {
 	// TODO: answer here
+	data, err := json.Marshal(r)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(data)
 }
 
 func NewRuang(r Ruang) Ruang {
