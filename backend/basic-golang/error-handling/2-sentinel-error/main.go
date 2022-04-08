@@ -24,8 +24,9 @@ func main() {
 		"Tony": 40,
 	}
 
-	_, err := GetAge(peopleAge, "Roger")
+	x, err := GetAge(peopleAge, "Roger")
 	if err != nil {
+		fmt.Print(x)
 		// Sentinel error memberikan kita keleluasaan dalam memberikan response terhadap error tersebut.
 		if err == ErrDataNotFound {
 			fmt.Printf("Data %s is not found, error: %s\n", "Roger", err.Error())

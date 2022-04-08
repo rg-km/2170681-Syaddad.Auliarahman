@@ -13,25 +13,20 @@ func CSVRead() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	//fmt.Println(f)
 
 	r := csv.NewReader(f)
 
-	//for {
-	record, err := r.Read()
-	if err == io.EOF {
-		fmt.Println("\nthis is the End Of File")
-		//break
-	}
+	for {
+		record, err := r.Read()
+		if err == io.EOF {
+			break
+		}
 
-	if err != nil {
-		log.Fatal(err)
+		if err != nil {
+			log.Fatal(err)
+		}
+		for value := range record {
+			fmt.Printf("%s\n", record[value])
+		}
 	}
-	for value := range record {
-		fmt.Print(value)
-		fmt.Printf("%s ", record[value])
-	}
-	//}
-	f.Close()
-	//defer f.Close()
 }

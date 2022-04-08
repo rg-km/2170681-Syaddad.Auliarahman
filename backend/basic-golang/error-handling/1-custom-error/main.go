@@ -18,6 +18,7 @@ func (e *ErrorDataNotFound) Error() string {
 
 func GetAge(data map[string]int, name string) (int, error) {
 	if _, ok := data[name]; !ok {
+		fmt.Println("diann", ok)
 
 		// Pada baris berikut terdapat return error dari custom error yang telah dibuat.
 		return 0, &ErrorDataNotFound{
@@ -36,7 +37,7 @@ func main() {
 		"Tony": 40,
 	}
 
-	_, err := GetAge(peopleAge, "Roger")
+	_, err := GetAge(peopleAge, "John")
 	if err != nil {
 		fmt.Println(err.Error())
 	}
