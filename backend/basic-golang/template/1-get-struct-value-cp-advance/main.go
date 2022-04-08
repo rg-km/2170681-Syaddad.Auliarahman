@@ -17,11 +17,25 @@ type Student struct {
 
 func (s Student) CalculateScore(scores []float64) float64 {
 	// TODO: answer here
+	var total float64
+	for _, score := range scores {
+		total += score
+	}
+	result := total / float64(len(scores))
+	return result
 }
 
 func (s Student) GenerateStudentTemplate() string {
 	buff := new(bytes.Buffer)
 	// TODO: answer here
+	tmp1 := template.New("Template_1")
+	tmp1, err := tmp1.Parse("Hello {{.Name}}, Nilai rata-rata kamu {{.CalculateScore .Scores}}")
+	if err != nil {
+		log.Fatalf("parse error: %s", err.Error())
+	}
+	if err := tmp1.Execute(buff, s); err != nil {
+		log.Fatalf("execute template error: %s", err.Error())
+	}
 	return buff.String()
 }
 

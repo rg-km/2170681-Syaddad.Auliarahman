@@ -22,4 +22,17 @@ type Account struct {
 func ExecuteToByteBuffer(account Account) ([]byte, error) {
 	var textTemplate string
 	// TODO: answer here
+	acc := account
+	textTemplate = `Akun {{.Name}} dengan Nomor {{.Number}} memiliki saldo sebesar ${{.Balance}}.`
+	tmplt, err := template.New("tmp1").Parse(textTemplate)
+	if err != nil {
+		panic(err)
+	}
+	var b bytes.Buffer
+	err = tmplt.Execute(&b, acc)
+	if err != nil {
+		panic(err)
+	}
+
+	return b.Bytes(), err
 }
