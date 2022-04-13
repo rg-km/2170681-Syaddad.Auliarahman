@@ -49,9 +49,29 @@ func NewEnglishSpellChecker() (SpellChecker, error) {
 }
 
 func (s *spellchecker) CheckWord(word string) bool {
-	return false // TODO: replace this
+
+	_, ok := s.words[strings.ToLower(word)]
+	// return s.words[strings.ToLower(word)]
+	return ok
+	// return false // TODO: replace this
 }
 
 func (s *spellchecker) CheckSentence(sentence string) (validWords []string, invalidWords []string) {
-	return nil, nil // TODO: replace this
+	words := strings.Split(sentence, " ")
+	for _, word := range words {
+		if s.CheckWord(word) {
+			validWords = append(validWords, word)
+		} else {
+			invalidWords = append(invalidWords, word)
+		}
+	}
+
+	if len(invalidWords) == 0 {
+		return validWords, []string{}
+	} else {
+		return validWords, invalidWords
+	}
+
+	// return validWords, invalidWords
+	// return nil, nil // TODO: replace this
 }
