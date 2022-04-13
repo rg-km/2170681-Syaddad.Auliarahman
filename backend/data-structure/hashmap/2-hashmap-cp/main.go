@@ -27,5 +27,30 @@ func main() {
 }
 
 func AnagramsChecker(str1 string, str2 string) string {
-	return "" // TODO: replace this
+	x := map[rune]bool{}
+	anagram := "Anagram"
+	Banagram := "Bukan Anagram"
+	if len(str1) != len(str2) {
+		return Banagram
+	}
+	for _, val := range str1 {
+		x[val] = true
+	}
+	//lenStr1 := len(str1)
+	//akhirStr1 := str1[lenStr1+1]
+	for _, val := range str2 {
+		//fmt.Printf("%c", val)
+		if _, exist := x[val]; exist {
+			if x[val] != false {
+				x[val] = false
+			}
+		}
+	}
+	for _, val := range x {
+		if val == true {
+			return Banagram
+		}
+	}
+
+	return anagram // TODO: replace this
 }
