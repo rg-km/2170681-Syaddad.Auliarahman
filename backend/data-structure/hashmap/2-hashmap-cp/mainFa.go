@@ -16,41 +16,38 @@
 // Output: "Bukan Anagram"
 // Explanation: Jika ditata, "apple" dan "paddle" memiliki huruf-huruf yang berbeda
 
-package main
+// import "fmt"
 
-import "fmt"
-
-func main() {
-	var str1 = "fried"
-	var str2 = "fired"
-	fmt.Println(AnagramsChecker(str1, str2))
-}
+// func main() {
+// 	var str1 = "fried"
+// 	var str2 = "fired"
+// 	fmt.Println(AnagramsChecker(str1, str2))
+// }
 
 func AnagramsChecker(str1 string, str2 string) string {
-	x := map[rune]bool{}
-	anagram := "Anagram"
-	Banagram := "Bukan Anagram"
+	var output string
 	if len(str1) != len(str2) {
-		return Banagram
-	}
-	for _, val := range str1 {
-		x[val] = true
-	}
-	//lenStr1 := len(str1)
-	//akhirStr1 := str1[lenStr1+1]
-	for _, val := range str2 {
-		//fmt.Printf("%c", val)
-		if _, exist := x[val]; exist {
-			if x[val] != false {
-				x[val] = false
+		output = "Bukan Anagram"
+	} else {
+		var str1Map = map[rune]int{}
+		var str2Map = map[rune]int{}
+
+		for _, val := range str1 {
+			str1Map[val]++
+		}
+
+		for _, val := range str2 {
+			str2Map[val]++
+		}
+		for key, val := range str1Map {
+			if str2Map[key] != val {
+				output = "Bukan Anagram"
+				break
 			}
 		}
-	}
-	for _, val := range x {
-		if val == true {
-			return Banagram
+		if output == "" {
+			output = "Anagram"
 		}
 	}
-
-	return anagram // TODO: replace this
+	return output // TODO: replace this
 }

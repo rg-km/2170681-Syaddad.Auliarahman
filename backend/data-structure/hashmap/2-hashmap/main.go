@@ -28,7 +28,8 @@ func numJewelsInStones(jewels string, stones string) int {
 	count := 0
 
 	for _, val := range jewels {
-		stoneMap[val] = true
+		fmt.Printf("%c\n", val)
+		stoneMap[val] = false
 	}
 
 	for _, stone := range stones {
