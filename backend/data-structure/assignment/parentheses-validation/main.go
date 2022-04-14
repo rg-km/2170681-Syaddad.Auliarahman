@@ -1,6 +1,10 @@
 package main
 
-import "github.com/ruang-guru/playground/backend/data-structure/assignment/parentheses-validation/stack"
+import (
+	"fmt"
+
+	"github.com/ruang-guru/playground/backend/data-structure/assignment/text-editor/stack"
+)
 
 // Salah satu problem populer yang dapat diselesaikan dengan menggunakan Stack adalah mengecek validitas tanda kurung.
 // Diberikan sebuah string yang hanya terdapat karakter '(', ')', '{', '}', '[', dan ']'.
@@ -26,4 +30,52 @@ import "github.com/ruang-guru/playground/backend/data-structure/assignment/paren
 
 func IsValidParentheses(s string) bool {
 	// TODO: answer here
+	if len(s)%2 != 0 || len(s) == 0 {
+		return false
+	}
+
+	parentthesesMap := map[rune]rune{
+		'(': ')',
+		'{': '}',
+		'[': ']',
+	}
+
+	stack := stack.Stack{
+		Top:  -1,
+		Data: []rune{},
+	}
+
+	for _, v := range s {
+
+		if _, ok := parentthesesMap[v]; ok {
+			stack.Push(parentthesesMap[v])
+		} else {
+			if stack.IsEmpty() {
+				return false
+			}
+			asd, err := stack.Peek()
+			if err != nil {
+				return false
+			}
+			// if v != asd {
+			// 	return false
+			// }
+			if v == asd {
+				stack.Pop()
+			} else if v != asd {
+				return false
+			}
+		}
+	}
+
+	if stack.IsEmpty() {
+		return true
+	} else {
+		return false
+	}
+
+}
+func main() {
+	asd := IsValidParentheses("()")
+	fmt.Println(asd)
 }
