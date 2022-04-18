@@ -25,13 +25,10 @@ import "fmt"
 
 func FibonacciRecursion(i int) int {
 
-	if i == 0 {
-		return 0
+	if i <= 1 {
+		return i
 	}
-
-	if i == 1 {
-		return 1
-	}
+	return FibonacciRecursion(i-1) + FibonacciRecursion(i-2)
 
 	// TODO: answer here
 }
