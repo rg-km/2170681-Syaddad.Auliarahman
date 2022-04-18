@@ -5,11 +5,15 @@ import "fmt"
 
 func mergeSort(items []int) []int {
 	if len(items) < 2 {
+		fmt.Println(items)
 		return items
 	}
 	first := mergeSort(items[:len(items)/2])
+	// fmt.Println(first)
 	second := mergeSort(items[len(items)/2:])
+	// fmt.Println(second)
 	return merge(first, second)
+	// return items
 }
 
 func main() {

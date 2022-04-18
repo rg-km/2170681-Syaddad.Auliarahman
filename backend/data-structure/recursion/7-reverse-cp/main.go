@@ -7,6 +7,15 @@ import "fmt"
 func Reverse(st []string, depth int) string {
 	str := ""
 	// TODO: answer here
+	if len(st) < 0 {
+		return str
+	}
+	// fmt.Println(st[:len(st)-3])
+	for len(st) > 0 {
+		str += st[len(st)-1]
+		st = st[:len(st)-1]
+	}
+
 	return str
 }
 
