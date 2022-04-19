@@ -11,8 +11,10 @@ var _ = Describe("Channel", func() {
 	When("sending", func() {
 		It("can block", func() {
 			output := make(chan bool)
-			go sendBlock(output)
+			tes := make(chan int)
+			go sendBlock(output, tes)
 			Expect(<-output).To(Equal(true))
+			Expect(<-tes).To(Equal(666))
 		})
 	})
 })
