@@ -8,7 +8,7 @@ func main() {
 	c := make(chan string)
 	go func() {
 		fmt.Println("receive from main")
-		fmt.Println(<-c) // blocking hingga ada yang mengirim data
+		fmt.Println("test", <-c) // blocking hingga ada yang mengirim data
 	}()
 
 	c <- "main say hello" //blocking hingga data yang dikirim ada yang menerima
