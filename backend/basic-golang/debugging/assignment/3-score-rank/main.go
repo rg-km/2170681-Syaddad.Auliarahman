@@ -36,10 +36,26 @@ func ScoreRank(score int) string {
 	default:
 		rank = "E"
 	}
-
 	return rank
 }
 
 func ScoreRankCorrect(score int) string {
-	return "" // TODO: replace this
+	if score > 100 || score < 0 {
+		return "INVALID"
+	}
+
+	var rank string
+	switch {
+	case score >= 90 && score <= 100:
+		rank = "A"
+	case score >= 80 && score < 90:
+		rank = "B"
+	case score >= 70 && score < 80:
+		rank = "C"
+	case score >= 60 && score < 70:
+		rank = "D"
+	default:
+		rank = "E"
+	}
+	return rank
 }

@@ -20,8 +20,10 @@ func main() {
 			c <- 2
 		}()
 	}
+	//fmt.Println(<-c)
 	go func() {
 		for {
+			//fmt.Println(<-c)
 			counter += <-c
 		}
 	}()
