@@ -22,5 +22,6 @@ func playMatch(i int) {
 
 func startTournament() {
 	// TODO: answer here
-	playMatch(10)
+	time.Sleep(100 * time.Millisecond)
+	go playMatch(10)
 }
