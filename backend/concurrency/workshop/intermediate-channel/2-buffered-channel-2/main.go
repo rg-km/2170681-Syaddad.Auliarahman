@@ -8,7 +8,8 @@ import (
 //mengembalikan hasil pangkat dua angka 1-10
 //dapat dilihat tidak terjadi blocking selama buffer belum penuh
 func squareWorker(output chan<- int) {
-	for i := 1; i < 11; i++ {
+	for i := 1; i < 12; i++ {
+		fmt.Println(i * i)
 		output <- i * i
 	}
 	fmt.Println("selesai mengirim")

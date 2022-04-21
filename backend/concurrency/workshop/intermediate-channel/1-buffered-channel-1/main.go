@@ -11,6 +11,7 @@ func main() {
 	input <- "channel"
 
 	for i := 0; i < cap(input); i++ {
+		fmt.Println(cap(input))
 		fmt.Println(<-input)
 	}
 }

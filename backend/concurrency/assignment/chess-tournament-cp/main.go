@@ -22,4 +22,5 @@ func playMatch(i int) {
 
 func startTournament() {
 	// TODO: answer here
+	playMatch(10)
 }
