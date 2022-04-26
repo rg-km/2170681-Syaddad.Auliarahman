@@ -13,9 +13,15 @@ func AsyncHttpGets(urls []string) []*http.Response {
 	ch := make(chan *http.Response)
 	responses := []*http.Response{}
 	// TODO: answer here
+	//time.Sleep(100 * time.Millisecond)
 	for _, url := range urls {
 		go func(url string) {
 			// TODO: answer here
+			resp, err := http.Get(url)
+			if err != nil {
+				fmt.Println(err)
+			}
+			ch <- resp
 		}(url)
 	}
 

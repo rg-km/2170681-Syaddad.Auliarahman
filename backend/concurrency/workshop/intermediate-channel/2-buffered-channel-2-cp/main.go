@@ -11,9 +11,9 @@ var names = []string{"budi", "toni", "adi", "ado", "alif", "yudi"}
 //mengembalikan string, dimana `name` menyapa semua `names`
 func greetAll(person string, names []string, output chan<- string) {
 	// TODO: answer here
-	// for _, x := range names {
-	// 	fmt.Printf("%s say hello to %s", person, x)
-	// }
+	for _, name := range names {
+		output <- fmt.Sprintf("%s say hello to %s", person, name)
+	}
 
 	fmt.Println("selesai mengirim")
 }
@@ -21,9 +21,9 @@ func greetAll(person string, names []string, output chan<- string) {
 // buat size buffered channel sesuai jumlah names
 func testBufferedChannel(result chan<- string) {
 	output := make(chan string) // TODO: replace this
-	for _, name := range names {
-		output <- fmt.Sprintf("%s say hello to %s", person, name)
-	}
+	// for _, name := range names {
+	// 	output <- fmt.Sprintf("%s say hello to %s", person, name)
+	// }
 
 	go greetAll(person, names, output)
 	time.Sleep(100 * time.Millisecond)
