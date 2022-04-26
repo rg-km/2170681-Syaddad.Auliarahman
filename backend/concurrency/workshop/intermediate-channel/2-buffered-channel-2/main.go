@@ -9,7 +9,7 @@ import (
 //dapat dilihat tidak terjadi blocking selama buffer belum penuh
 func squareWorker(output chan<- int) {
 	for i := 1; i < 12; i++ {
-		fmt.Println(i * i)
+		//fmt.Println(i * i)
 		output <- i * i
 	}
 	fmt.Println("selesai mengirim")
