@@ -13,6 +13,7 @@ const numOfRequests = 1000
 //bagaimana cara membatasi data yang diproses ? hint:buffered channel
 func doubleCalculatorWorker(queue chan request, maxThroughput int, maxObservedThroughtputC chan int) {
 	// TODO: answer here
+	output := make(chan int, maxThroughput)
 
 	maxObservedThroughtput := 0
 	curThroughtput := 0
@@ -21,6 +22,7 @@ func doubleCalculatorWorker(queue chan request, maxThroughput int, maxObservedTh
 	//secara sederhananya mutex digunakan untuk memastikan hanya ada satu goroutine yang mengakses suatu bagian kode
 	mu := &sync.Mutex{}
 	for req := range queue {
+		output <- req.data * req.data
 		// TODO: answer here
 		go func(req request) {
 			mu.Lock()
@@ -39,6 +41,7 @@ func doubleCalculatorWorker(queue chan request, maxThroughput int, maxObservedTh
 			mu.Unlock()
 
 			// TODO: answer here
+			<-output
 		}(req)
 	}
 	maxObservedThroughtputC <- maxObservedThroughtput
