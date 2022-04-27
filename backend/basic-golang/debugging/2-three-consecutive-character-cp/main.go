@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	/*
@@ -11,7 +13,7 @@ func main() {
 		www.ruangguru.com -> 1
 		helloworld -> -1
 	*/
-	result := ThreeConsecutiveCharacterPosition("helloworld")
+	result := ThreeConsecutiveCharacterPositionCorrect("www.ruangguru.com")
 	fmt.Println(result)
 }
 
@@ -25,5 +27,16 @@ func ThreeConsecutiveCharacterPosition(word string) int {
 }
 
 func ThreeConsecutiveCharacterPositionCorrect(word string) int {
-	return 0 // TODO: replace this
+	word += "   "
+	empty := " "
+	for i := 0; i < len(word); i++ {
+		if string(word[i]) == empty {
+			return -1
+		}
+		if word[i] == word[i+1] && word[i] == word[i+2] {
+			// fmt.Println(string(word[i]))
+			return 1
+		}
+	}
+	return -1 // TODO: replace this
 }

@@ -8,4 +8,11 @@ import "fmt"
 // Lalu outputkan array nya.
 func main() {
 	// TODO: answer here
+	var nama []string
+	for i := 0; i < 7; i++ {
+		var x string
+		fmt.Scanln(&x)
+		nama = append(nama, x)
+	}
+	fmt.Println(nama)
 }
