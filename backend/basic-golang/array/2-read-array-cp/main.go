@@ -7,4 +7,6 @@ import "fmt"
 // Outputkan hasilnya ya
 func main() {
 	// TODO: answer here
+	nama := [7]string{"s", "y", "a", "d", "d", "a", "d"}
+	fmt.Println(nama[0], nama[len(nama)-1])
 }
