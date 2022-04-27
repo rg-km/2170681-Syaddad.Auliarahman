@@ -3,7 +3,6 @@ package api
 import (
 	"encoding/json"
 	"net/http"
-	"time"
 
 	"github.com/golang-jwt/jwt/v4"
 )
@@ -40,12 +39,6 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 		encoder.Encode(AuthErrorResponse{Error: err.Error()})
 		return
 	}
-
-<<<<<<< HEAD
-	//fmt.Println(*res)
-
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: *res}) // TODO: replace this
-=======
 	// Task: 1. Deklarasi expiry time untuk token jwt
 	//       2. Buat claim menggunakan variable yang sudah didefinisikan diatas
 	//       3. expiry time menggunakan time millisecond
@@ -67,8 +60,9 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 
 	// Task: Return response berupa username dan token JWT yang sudah login
 
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: "", Token: ""}) // TODO: replace this
->>>>>>> 06a3a21bb58f321e17bba88d1f6f358fe94f7b83
+	//fmt.Println(*res)
+
+	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: *res}) // TODO: replace this
 }
 
 func (api *API) logout(w http.ResponseWriter, req *http.Request) {
