@@ -1,11 +1,7 @@
 package api
 
 import (
-	"context"
-	"encoding/json"
 	"net/http"
-
-	"github.com/dgrijalva/jwt-go"
 )
 
 func (api *API) AllowOrigin(w http.ResponseWriter, req *http.Request) {
@@ -27,7 +23,7 @@ func (api *API) AllowOrigin(w http.ResponseWriter, req *http.Request) {
 func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		api.AllowOrigin(w, r)
-		encoder := json.NewEncoder(w)
+		// encoder := json.NewEncoder(w)
 		// Task: 1. Ambil token dari cookie yang dikirim ketika request
 		//       2. return unauthorized ketika token kosong
 		//       3. return bad request ketika field token tidak ada
@@ -51,6 +47,6 @@ func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 
 		// Task: Validasi
 
-		return next.ServeHTTP(w, r) // TODO: replace this
+		// return next.ServeHTTP(w, r) // TODO: replace this
 	})
 }

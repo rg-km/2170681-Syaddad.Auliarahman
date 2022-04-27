@@ -36,17 +36,5 @@ func CalculateChange(totalPayment, totalPrice float64) float64 {
 }
 
 func CalculateChangeCorrect(totalPayment, totalPrice float64) float64 {
-	minimumPriceForDiscount := float64(100000)
-	if totalPrice >= minimumPriceForDiscount {
-		discountRate := 0.05
-		discountPrice := totalPrice * discountRate
-		totalPrice = totalPrice - discountPrice
-	}
-	if totalPayment < totalPrice {
-		return -1
-	}
-
-	change := totalPayment - totalPrice
-
-	return change
+	return 0 // TODO: replace this
 }

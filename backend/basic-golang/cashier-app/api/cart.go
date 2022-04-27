@@ -59,6 +59,7 @@ func (api *API) clearCart(w http.ResponseWriter, req *http.Request) {
 	defer func() {
 		if err != nil {
 			// TODO: answer here
+			w.WriteHeader(http.StatusBadRequest)
 			encoder.Encode(CartErrorResponse{Error: err.Error()})
 		}
 	}()

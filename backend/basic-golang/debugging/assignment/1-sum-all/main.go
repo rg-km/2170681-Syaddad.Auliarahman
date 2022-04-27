@@ -1,11 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	arr := []int{0, 1, 2, 3}
+	arr := []int{12, 5, 10, 1, 3}
 
-	res := SumAll(arr)
+	res := SumAllCorrect(arr)
 	fmt.Println(res)
 
 	// Try correct answer:
@@ -24,7 +26,10 @@ func SumAll(arr []int) int {
 func SumAllCorrect(arr []int) int {
 	res := 0
 	for _, val := range arr {
+		//fmt.Println(val)
 		res += val
 	}
 	return res
+
+	//return 0 // TODO: replace this
 }
