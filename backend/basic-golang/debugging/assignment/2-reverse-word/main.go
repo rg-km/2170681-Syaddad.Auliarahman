@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	/*
@@ -8,7 +10,7 @@ func main() {
 		Example: halo -> olah
 	*/
 	word := "halo"
-	res := ReverseWord(word)
+	res := ReverseWordCorrect(word)
 	fmt.Println(res)
 
 	// Try correct answer:
@@ -23,6 +25,7 @@ func ReverseWord(word string) string {
 	for i := 0; i <= n; i++ {
 		left := i
 		right := n - i - 1
+
 		temp[left], temp[right] = temp[right], temp[left]
 	}
 
@@ -30,5 +33,17 @@ func ReverseWord(word string) string {
 }
 
 func ReverseWordCorrect(word string) string {
-	return 0 // TODO: replace this
+	n := len(word)
+	temp := []byte(word)
+
+	for i := 0; i < n/2; i++ {
+		left := i
+		right := n - i - 1
+		//fmt.Println(n, i, right)
+		temp[left], temp[right] = temp[right], temp[left]
+
+	}
+
+	return string(temp)
+	//return 0 // TODO: replace this
 }
