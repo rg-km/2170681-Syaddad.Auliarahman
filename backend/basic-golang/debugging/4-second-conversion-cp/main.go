@@ -13,12 +13,12 @@ func main() {
 		678120 -> 188:22:00
 
 	*/
-	res := ConvertSecondToTimeString(30)
-	fmt.Println(res)
+	// res := ConvertSecondToTimeString(30)
+	// fmt.Println(res)
 
 	// Try correct answer:
-	// resCorrect := ConvertSecondToTimeStringCorrect(arr)
-	// fmt.Println(resCorrect)
+	resCorrect := ConvertSecondToTimeStringCorrect(678120)
+	fmt.Println(resCorrect)
 }
 
 func ConvertSecondToTimeString(second int) string {
@@ -30,5 +30,33 @@ func ConvertSecondToTimeString(second int) string {
 }
 
 func ConvertSecondToTimeStringCorrect(second int) string {
-	return "" // TODO: replace this
+	var (
+		hours   int
+		minutes int
+	)
+	if second >= 3600 {
+		hours = second / 3600
+	} else if second >= 60 {
+		minutes = second / 60
+	}
+
+	if hours >= 1 {
+		second -= (3600 * hours)
+		if second >= 60 {
+			minutes = second / 60
+			if minutes >= 1 {
+				second -= (60 * minutes)
+			}
+		}
+
+		timeString := fmt.Sprintf("%02d:%02d:%02d", hours, minutes, second)
+		return timeString
+	}
+	if minutes >= 1 {
+		second -= (60 * minutes)
+	}
+
+	timeString := fmt.Sprintf("%02d:%02d:%02d", hours, minutes, second)
+	return timeString
+	//return "" // TODO: replace this
 }
