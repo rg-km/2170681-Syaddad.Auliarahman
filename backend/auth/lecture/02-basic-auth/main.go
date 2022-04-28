@@ -22,7 +22,7 @@ func Routes() *http.ServeMux {
 			return
 		}
 
-		if user != "admin" && password != "123" {
+		if user != "admin" && password != "Konmtolll" {
 			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
@@ -36,4 +36,4 @@ func Routes() *http.ServeMux {
 //Encode auth admin:123 disini -> https://www.base64encode.org/ atau menggunakan code sebelumnya yaitu 01-encode-base64
 
 // Test menggunakan curl:
-//$ curl -v -X GET http://localhost:8000/signin -H "Authorization: Basic YWRtaW46MTIz"
+//$ curl -v -X GET http://localhost:8000/signin -H "Authorization: Basic YWRtaW46S29ubXRvbGxs"

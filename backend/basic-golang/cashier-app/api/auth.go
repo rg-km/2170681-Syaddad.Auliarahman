@@ -45,7 +45,7 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 	//       3. expiry time menggunakan time millisecond
 
 	// TODO: answer here
-	expirationTime := time.Now().Add(500 * time.Millisecond)
+	expirationTime := time.Now().Add(5 * time.Minute)
 	claims := &Claims{
 		Username: username,
 		StandardClaims: jwt.StandardClaims{
@@ -83,7 +83,7 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 
 	//fmt.Println(*res)
 
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: *res}) // TODO: replace this
+	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: *res, Token: tokenString}) // TODO: replace this
 }
 
 func (api *API) logout(w http.ResponseWriter, req *http.Request) {
