@@ -2,6 +2,8 @@ package api
 
 import (
 	"net/http"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 func (api *API) AllowOrigin(w http.ResponseWriter, req *http.Request) {
@@ -29,14 +31,26 @@ func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 		//       3. return bad request ketika field token tidak ada
 
 		// TODO: answer here
-
+		c, err := r.Cookie("token")
+		if err != nil {
+			if err == http.ErrNoCookie {
+				// return unauthorized ketika token kosong
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+			// return bad request ketika field token tidak ada
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
 		// Task: Ambil value dari cookie token
 
 		// TODO: answer here
+		tknStr := c.Value
 
 		// Task: Deklarasi variable claim
 
 		// TODO: answer here
+		claims := &Claims{}
 
 		// Task: 1. parse JWT token ke dalam claim
 		//       2. return unauthorized ketika signature invalid
@@ -44,9 +58,26 @@ func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 		//       4. return unauthorized ketika token sudah tidak valid (biasanya karna token expired)
 
 		// TODO: answer here
+		tkn, err := jwt.ParseWithClaims(tknStr, claims, func(token *jwt.Token) (interface{}, error) {
+			return jwtKey, nil
+		})
+		if err != nil {
+			if err == jwt.ErrSignatureInvalid {
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+		if !tkn.Valid {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
 
 		// Task: Validasi
 
+		//w.WriteHeader(http.StatusUnauthorized)
+		next.ServeHTTP(w, r)
 		// return next.ServeHTTP(w, r) // TODO: replace this
 	})
 }
