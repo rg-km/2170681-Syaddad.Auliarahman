@@ -27,7 +27,12 @@ type DashboardSuccessResponse struct {
 func (api *API) dashboard(w http.ResponseWriter, req *http.Request) {
 	api.AllowOrigin(w, req)
 	encoder := json.NewEncoder(w)
-	username := req.Context().Value("username").(string)
+	username, err := api.usersRepo.FindLoggedinUser()
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		encoder.Encode(DashboardErrorResponse{Error: err.Error()})
+		return
+	}
 
 	cartItems, err := api.cartItemRepo.SelectAll()
 
@@ -64,13 +69,13 @@ func (api *API) dashboard(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	moneyChanges, err := api.transactionRepo.Pay(cartItems, cash)
+	moneyChanges, err := api.transactionRepo.Pay(cash)
 	if err != nil {
 		return
 	}
 
 	response := DashboardSuccessResponse{
-		Username:     username,
+		Username:     *username,
 		TotalPrice:   sumPrice,
 		MoneyChanges: moneyChanges,
 	}
