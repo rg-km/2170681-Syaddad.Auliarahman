@@ -22,7 +22,7 @@ type AdminResponse struct {
 }
 
 func (api *API) getDashboard(w http.ResponseWriter, req *http.Request) {
-	api.AllowOrigin(w, req)
+	// api.AllowOrigin(w, req)
 	// productName := req.URL.Query().Get("product_name")
 	// var startPeriod time.Time
 	// var endPeriod time.Time
@@ -42,5 +42,6 @@ func (api *API) getDashboard(w http.ResponseWriter, req *http.Request) {
 	// }
 
 	// encoder.Encode(AdminResponse{Sales: sales})
-	w.WriteHeader(http.StatusOK)
+	// w.WriteHeader(http.StatusOK)
+
 }
