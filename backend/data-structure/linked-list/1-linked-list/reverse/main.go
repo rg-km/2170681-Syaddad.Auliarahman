@@ -14,6 +14,8 @@
 
 package main
 
+import "fmt"
+
 // Definisi untuk singly-linked list.
 type ListNode struct {
 	Val  int
@@ -45,11 +47,17 @@ func main() {
 
 func reverseList(head *ListNode) *ListNode {
 	var front *ListNode
-	mid, end := head, head
-	for mid != nil {
-		end = mid.Next
-		mid.Next = front
-		front, mid = mid, end
+	curr, next := head, head
+	for curr != nil {
+		//fmt.Println(curr)
+		next = curr.Next
+		fmt.Println(front, curr, next)
+
+		curr.Next = front
+		fmt.Println(front)
+		//front, mid = curr, next
+		front = curr
+		curr = next
 	}
 	return front
 }
