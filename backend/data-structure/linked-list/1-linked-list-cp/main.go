@@ -41,6 +41,10 @@ func main() {
 	node5.Val = 5
 	node4.Next = node5
 
+	// node6 := new(ListNode)
+	// node6.Val = 6
+	// node5.Next = node6
+
 	data := node1.MiddleNode(node1)
 
 	// Print Middle Node
@@ -64,6 +68,22 @@ func (node ListNode) MiddleNode(head *ListNode) *ListNode {
 		tmp = tmp.Next
 		l++
 	}
-	// TODO: answer here
+	fmt.Println(l)
+	//res := head
+	// if l%2 == 0 {
+	// 	where := l / 2
+	// 	for i := 0; i < where; i++ {
+	// 		head = head.Next
+	// 	}
+	// 	return head
+	// }
+	where := l / 2
+	for i := 0; i < where; i++ {
+		head = head.Next
+	}
 	return head
+
+	//return head
+	// TODO: answer here
+	//return head
 }
