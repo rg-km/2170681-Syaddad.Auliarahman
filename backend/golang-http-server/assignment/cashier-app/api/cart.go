@@ -2,11 +2,9 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"
-	"log"
 	"net/http"
 
-	"github.com/ruang-guru/playground/backend/golang-http-server/assignment/cashier-app/repository"
+	"github.com/ruang-guru/playground/backend/basic-golang/cashier-app/repository"
 )
 
 type CartErrorResponse struct {
@@ -19,24 +17,13 @@ type AddToCartSuccessResponse struct {
 	Category string `json:"category"`
 }
 
-type AddToCardRequest struct {
-	ProductName string `json:"product_name"`
-}
-
 type CartListSuccessResponse struct {
 	CartItems []repository.CartItem `json:"cart_items"`
 }
 
 func (api *API) addToCart(w http.ResponseWriter, req *http.Request) {
 	api.AllowOrigin(w, req)
-
-	var requestBody AddToCardRequest
-	err := json.NewDecoder(req.Body).Decode(&requestBody)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
-
+	productName := req.URL.Query().Get("product_name")
 	encoder := json.NewEncoder(w)
 
 	allProducts, err := api.productsRepo.SelectAll()
@@ -47,9 +34,8 @@ func (api *API) addToCart(w http.ResponseWriter, req *http.Request) {
 		}
 	}()
 
-	log.Println(requestBody.ProductName)
 	for _, product := range allProducts {
-		if product.ProductName == requestBody.ProductName {
+		if product.ProductName == productName {
 			err = api.cartItemRepo.Add(product)
 			if err != nil {
 				return
@@ -73,6 +59,7 @@ func (api *API) clearCart(w http.ResponseWriter, req *http.Request) {
 	defer func() {
 		if err != nil {
 			// TODO: answer here
+			w.WriteHeader(http.StatusBadRequest)
 			encoder.Encode(CartErrorResponse{Error: err.Error()})
 		}
 	}()
@@ -91,25 +78,6 @@ func (api *API) cartList(w http.ResponseWriter, req *http.Request) {
 		}
 	}()
 
-	fmt.Println(cartItems)
-
-	encoder.Encode(CartListSuccessResponse{CartItems: []repository.CartItem{}}) // TODO: replace this
-}
-
-func (api *API) pay(w http.ResponseWriter, req *http.Request) {
-	api.AllowOrigin(w, req)
-
-	cartItems, err := api.cartItemRepo.SelectAll()
-	encoder := json.NewEncoder(w)
-	defer func() {
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			encoder.Encode(CartErrorResponse{Error: err.Error()})
-		}
-	}()
-
-	err = api.salesRepo.Add(cartItems)
-
-	encoder.Encode(CartListSuccessResponse{CartItems: []repository.CartItem{}}) // TODO: replace this
-
+	// fmt.Println(cartItems)
+	encoder.Encode(CartListSuccessResponse{CartItems: cartItems}) // TODO: replace this
 }
