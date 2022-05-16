@@ -11,7 +11,25 @@ import (
 // Buatlah route "/hello" yang menampilkan JSON {"message": "hello"} dan "/world" yang menampilkan JSON {"message": "world"}
 
 func GetGinRoute() *gin.Engine {
-	return &gin.Engine{} // TODO: replace this
+	r := gin.Default()
+	//{"message": "hello"}
+	r.GET("/hello", func(c *gin.Context) {
+		// req.resp
+		c.JSON(http.StatusOK, gin.H{
+			"message": "hello",
+		})
+	})
+
+	//{"message": "World"}
+	r.GET("/world", func(c *gin.Context) {
+		// req.resp
+		c.JSON(http.StatusOK, gin.H{
+			"message": "world",
+		})
+	})
+
+	return r
+	// return &gin.Engine{} // TODO: replace this
 }
 
 func main() {
