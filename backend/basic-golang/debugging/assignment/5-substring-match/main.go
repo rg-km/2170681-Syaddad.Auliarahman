@@ -52,7 +52,7 @@ func IsExistInSourceCorrect(source, search string) bool {
 				if source[x+y] != search[y] {
 					//fmt.Println(string(source[x+y]), string(search[y]))
 					return false
-				}
+				}else if()
 			}
 			found = true
 		}

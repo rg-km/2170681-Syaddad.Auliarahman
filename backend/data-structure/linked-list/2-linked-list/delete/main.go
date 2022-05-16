@@ -39,6 +39,7 @@ func main() {
 func (l *LinkedList) Insert(val int) {
 	n := Node{}
 	n.value = val
+	fmt.Println(l.len, n, &n)
 	if l.len == 0 {
 		l.head = &n
 		l.len++
