@@ -27,6 +27,7 @@ func main() {
 	list.Insert(13)
 	list.Insert(14)
 	list.Insert(15)
+	fmt.Println(list.GetAt(2))
 
 	fmt.Println("Deleting node at position 2")
 	list.DeleteAt(2)
