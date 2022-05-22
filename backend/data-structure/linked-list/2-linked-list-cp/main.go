@@ -65,8 +65,13 @@ func (l *LinkedList) DeleteVal(val int) (LinkedList, error) {
 		return LinkedList{}, fmt.Errorf("list is empty")
 	}
 	for i := 0; i < l.len; i++ {
+
 		if ptr.value == val {
 			// TODO: answer here
+			//where := i
+			nodePrev := l.GetAt(i - 1)
+			nodePrev.next = l.GetAt(i).next
+			l.len--
 			return *l, nil
 		}
 		ptr = ptr.next
