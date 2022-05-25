@@ -20,7 +20,7 @@ func (m Meja) EncodeJSON() string {
 	// TODO: answer here
 	data, err := json.Marshal(m)
 	if err != nil {
-		log.Fatal("JSON Marshal error: ", err)
+		log.Fatal(err)
 	}
 	return string(data)
 }

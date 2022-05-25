@@ -38,6 +38,16 @@ var _ = Describe("User", func() {
 	})
 
 	AfterEach(func() {
+		db, err := sql.Open("sqlite3", "./music-app.db")
+		if err != nil {
+			panic(err)
+		}
+
+		_, err = db.Exec(`DROP TABLE users`)
+		if err != nil {
+			panic(err)
+		}
+
 		os.Remove("./music-app.db")
 	})
 

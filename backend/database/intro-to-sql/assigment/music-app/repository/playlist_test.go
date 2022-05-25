@@ -92,6 +92,31 @@ var _ = Describe("Playlist", func() {
 	})
 
 	AfterEach(func() {
+		db, err := sql.Open("sqlite3", "./music-app.db")
+		if err != nil {
+			panic(err)
+		}
+
+		_, err = db.Exec(`DROP TABLE users`)
+		if err != nil {
+			panic(err)
+		}
+
+		_, err = db.Exec(`DROP TABLE playlists`)
+		if err != nil {
+			panic(err)
+		}
+
+		_, err = db.Exec(`DROP TABLE tracks`)
+		if err != nil {
+			panic(err)
+		}
+
+		_, err = db.Exec(`DROP TABLE playlist_tracks`)
+		if err != nil {
+			panic(err)
+		}
+
 		os.Remove("./music-app.db")
 	})
 
