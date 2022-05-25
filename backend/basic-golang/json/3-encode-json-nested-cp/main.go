@@ -49,12 +49,12 @@ type Items struct {
 }
 
 func (m Items) EncodeJSON() string {
-	// TODO: answer here
-	data, err := json.Marshal(m.MejaMeja)
+	mejaJson, err := json.Marshal(m.MejaMeja)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Error : ", err)
 	}
-	return string(data)
+	return string(mejaJson)
+	// TODO: answer here
 }
 
 func NewMeja(m Items) Items {
