@@ -37,7 +37,9 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	var students = []int{1, 1, 1, 0, 0, 1}
@@ -46,5 +48,37 @@ func main() {
 }
 
 func CountStudents(students []int, sandwiches []int) int {
-	0 // TODO: replace this
+	var resStudents []int
+	//var resSandwiches []int
+	if len(sandwiches) != len(students) {
+		return 0
+	}
+	//fmt.Println(sandwiches[len(students)-1:], students[:len(sandwiches)-1])
+	loop := len(students)
+	for i := 0; i < loop; i++ {
+		fmt.Println(students)
+		if students[0] == sandwiches[0] {
+			//fmt.Println("FOUND", students[0], sandwiches[0])
+			students = students[1:]
+			sandwiches = sandwiches[1:]
+
+		} else {
+			resStudents = append(resStudents, students[1:]...)
+			fmt.Println("HERE", students[1:])
+			resStudents = append(resStudents, students[0:1]...)
+			fmt.Println(students[0:1])
+			fmt.Println("First", resStudents)
+			fmt.Println(sandwiches)
+			//fmt.Println(students[1:], students[2:], students[3:])
+
+			// fmt.Println(resStudents)
+			students = resStudents
+			resStudents = nil
+			// fmt.Println(resStudents)
+			//return len(students)
+		}
+		// fmt.Println(students)
+	}
+
+	return len(students) // TODO: replace this
 }
