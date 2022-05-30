@@ -29,7 +29,7 @@ import (
 )
 
 func main() {
-	var tickets = []int{2, 3, 3}
+	var tickets = []int{1, 2, 1}
 	var k = 2
 	fmt.Println(timeRequiredToBuy(tickets, k))
 }
@@ -39,6 +39,9 @@ func timeRequiredToBuy(tickets []int, k int) int {
 	res := 0
 
 	for i := 0; i < len(tickets); i++ {
+		fmt.Println(tickets[i], val)
+		fmt.Println(int(math.Min(float64(tickets[i]), val)))
+
 		res += int(math.Min(float64(tickets[i]), val))
 	}
 	return res
