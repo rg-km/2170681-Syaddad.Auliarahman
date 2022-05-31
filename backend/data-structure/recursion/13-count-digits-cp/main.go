@@ -3,15 +3,20 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 var count int = 0
 
 //function to count digits
 func CountDigits(num int) int {
-
+	// strNum := strconv.Itoa(num)
+	// fmt.Println(strNum)
 	if num > 0 {
-		CountDigits(0) // TODO: replace this
+		count++
+		CountDigits(num / 10) // TODO: replace this
+
 	}
 	return count
 
