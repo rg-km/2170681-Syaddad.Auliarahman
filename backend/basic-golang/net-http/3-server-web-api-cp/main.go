@@ -45,6 +45,10 @@ var data = []Table{
 	{ID: "T004", Type: "Meja Hejau", Color: "Hijau", Total: 3},
 }
 
+func abal_abal(i int) string {
+	return fmt.Sprintln("Lah kok ilang")
+}
+
 func main() {
 	http.HandleFunc("/view/table", viewTable)
 
