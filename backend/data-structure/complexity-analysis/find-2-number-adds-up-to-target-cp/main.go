@@ -30,9 +30,21 @@ func main() {
 func TwoTargetSums(nums []int, target int) []int {
 	numberMap := make(map[int]int)
 	output := make([]int, 2)
+	// for _, val := range nums {
+	// 	numberMap[val] = 0
+	// }
 	for i := 0; i < len(nums); i++ {
+
 		val, ok := numberMap[target-nums[i]]
-		// TODO: answer here
+		if ok == true {
+			output[0] = val
+			output[1] = i
+		} else {
+			numberMap[nums[i]] = i
+			fmt.Println(nums[i], i)
+		}
+		//fmt.Println(numberMap)
+
 	}
 	return output
 }
