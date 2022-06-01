@@ -25,9 +25,13 @@ import (
 func GCD(a, b int) int {
 	for b != 0 {
 		t := b
+
 		b = a % b
+		fmt.Println("b", b)
 		a = t
+		fmt.Println("t", t)
 	}
+	fmt.Println("a", a)
 	return a
 }
 
@@ -38,6 +42,7 @@ func LCM(a, b int, integers ...int) int {
 	// if there are more integers, find LCM of all integers
 	for i := 0; i < len(integers); i++ {
 		// TODO: answer here
+		result = result * integers[i] / GCD(result, integers[i])
 	}
 
 	return result
@@ -45,6 +50,6 @@ func LCM(a, b int, integers ...int) int {
 
 func main() {
 	fmt.Println(LCM(3, 4))
-	fmt.Println(LCM(10, 15, 20))
-	fmt.Println(LCM(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+	// fmt.Println(LCM(10, 15, 20))
+	// fmt.Println(LCM(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
 }
