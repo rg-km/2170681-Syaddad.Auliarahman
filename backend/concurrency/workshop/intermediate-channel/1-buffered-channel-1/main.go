@@ -30,6 +30,7 @@ func main() {
 		arr = append(arr, x)
 		input <- arr[i]
 	}
+	close(input)
 
 	// input <- "halo"
 	// input <- "dari buffered"
