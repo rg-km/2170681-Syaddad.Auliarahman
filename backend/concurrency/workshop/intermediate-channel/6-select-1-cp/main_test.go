@@ -27,7 +27,7 @@ var _ = Describe("channel", func() {
 			attackInput <- "B"
 			movementInput <- "kanan"
 			attackInput <- "C"
-			time.Sleep(100 * time.Millisecond)
+			time.Sleep(500 * time.Millisecond)
 			Expect(john.activity).ToNot(Equal(""))
 		})
 	})

@@ -8,6 +8,7 @@ import (
 //numberWorker digunakan untuk mengirim data ke channel output
 func numberWorker(output chan int) {
 	for i := 0; i < 100; i++ {
+		output <- i
 		//kirim ke channel
 		// TODO: answer here
 
@@ -20,7 +21,7 @@ func numberWorker(output chan int) {
 func receiver(result chan int) {
 	//buat channel dengan ukuran yang sesuai dengan data-
 	//yang akan dikirim numWorker
-	output:=make(chan int) // TODO: replace this
+	output := make(chan int, 100) // TODO: replace this
 	sum := 0
 
 	go numberWorker(output)
