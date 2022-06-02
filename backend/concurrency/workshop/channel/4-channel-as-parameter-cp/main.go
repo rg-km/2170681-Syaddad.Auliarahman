@@ -7,6 +7,7 @@ import "fmt"
 func greet(name1, name2 string, c chan string) {
 	greeting := fmt.Sprintf("halo %s dan %s", name1, name2)
 	fmt.Printf("kirim %s ke channel\n", greeting)
+	c <- greeting
 	// TODO: answer here
 }
 
@@ -17,10 +18,12 @@ func start(name1, name2 string, output chan string) {
 	fmt.Printf("akan menyapa %s dan %s\n", name1, name2)
 
 	// menjalankan goroutine greet
+	go greet(name1, name2, c)
 	// TODO: answer here
 
 	//menerima data dari channel
 	// TODO: answer here
+	greeting = <-c
 	fmt.Println(c) //agar variabel c digunakan
 	fmt.Printf("fungtion greet say: %s\n", greeting)
 	output <- greeting
