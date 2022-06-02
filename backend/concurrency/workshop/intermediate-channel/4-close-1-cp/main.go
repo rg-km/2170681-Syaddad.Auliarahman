@@ -15,5 +15,6 @@ func receiver(output chan int) {
 	for number := range input {
 		output <- number
 	}
+	close(output)
 	// TODO: answer here
 }
