@@ -5,6 +5,7 @@ func numberWorker(input chan int) {
 	for i := 0; i < 10; i++ {
 		input <- i
 	}
+	close(input)
 	// TODO: answer here
 }
 

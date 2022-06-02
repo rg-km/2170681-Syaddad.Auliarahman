@@ -1,14 +1,24 @@
 package main
 
+import (
+	"time"
+)
+
 func squareWorker(input <-chan int, output chan<- int) {
 	//lakukan for range loop
 	// TODO: answer here
+	for i := range input {
+		output <- i * i
+	}
+
 }
 
 func receiver(output chan<- int) {
 	input := make(chan int) // mengirim 0-10 ke squareWorker
 	go squareWorker(input, output)
 	for i := 0; i < 10; i++ {
+		input <- i
+		time.Sleep(time.Millisecond * 50)
 		//kirim nilai i ke channel
 		// TODO: answer here
 	}
