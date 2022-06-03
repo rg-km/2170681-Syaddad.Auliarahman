@@ -16,7 +16,9 @@ type worker struct {
 func (w *worker) doWork(input string) {
 	for i := 0; i < 100; i++ {
 		// TODO: answer here
+		w.sem.Acquire()
 		go func() {
+			defer w.sem.Release()
 			// TODO: answer here
 			w.mu.Lock()
 			w.currentWork++
