@@ -20,7 +20,7 @@ require (
 	github.com/spf13/viper v1.10.1
 	github.com/tsenart/vegeta/v12 v12.8.4
 	github.com/valyala/fastjson v1.6.3
-	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4
+	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e
 	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8
 )
 
