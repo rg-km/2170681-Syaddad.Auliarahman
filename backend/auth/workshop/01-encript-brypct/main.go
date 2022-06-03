@@ -18,6 +18,10 @@ func main() {
 // encrypt string kedalam bcrypt
 func encryptToBcrypt(str string) (string, error) {
 	// Task: Hashing the password with the default cost of 10
-
-	return "", nil // TODO: replace this
+	res, err := bcrypt.GenerateFromPassword([]byte(str), 10)
+	if err != nil {
+		return "", err
+	}
+	resStr := string(res)
+	return resStr, nil // TODO: replace this
 }
