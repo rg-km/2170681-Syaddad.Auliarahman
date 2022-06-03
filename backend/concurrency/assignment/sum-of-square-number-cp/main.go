@@ -8,7 +8,8 @@ import "fmt"
 //fungsi ini digunakan untuk menerima angka lalu mengembalikan hasil pangkat 2 angka tersebut
 func squareWorker(workerInput <-chan int, workerOutput chan<- int) {
 	for {
-		num := <-workerInput      // menerima angka
+		num := <-workerInput
+		//fmt.Println("num", num)   // menerima angka
 		workerOutput <- num * num // mengirim hasil
 	}
 }
@@ -20,9 +21,22 @@ func createRequest(workerInput, resultChan chan<- int, workerOutput <-chan int) 
 		// TODO: answer here
 		workerInput <- i
 		res = <-workerOutput
+		//fmt.Println("res", res)
 		resultSum += res
 		fmt.Printf("hasil pangkat 2 angka %d adalah: %d\n", i, res) // 0 1 4 9 16
 	}
 	fmt.Printf("total penjumlahan : %d\n", resultSum)
 	resultChan <- resultSum
+
+}
+
+func main() {
+	workerInput := make(chan int)
+	workerOutput := make(chan int)
+	resultChan := make(chan int)
+
+	go createRequest(workerInput, resultChan, workerOutput)
+	go squareWorker(workerInput, workerOutput)
+
+	<-resultChan
 }
