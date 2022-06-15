@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -25,24 +24,35 @@ func Routes() *http.ServeMux {
 		var creds Credentials
 
 		// Task:  Buat JSON body diconvert menjadi credential struct & return bad request ketika terjadi kesalahan decoding json
+		err := json.NewDecoder(r.Body).Decode(&creds)
 
 		// TODO: answer here
 
 		// Task: Ambil password dari username yang dipakai untuk login
 
 		// TODO: answer here
+		password := creds.Password
 
 		// Task: return unauthorized jika password salah
-
+		if users[creds.Username] != password {
+			w.WriteHeader(http.StatusUnauthorized)
+		}
 		// TODO: answer here
 
 		// Task: 1. Buat token string menggunakan bcrypt dari credential username
 		// 		 2. return internal server error ketika terjadi kesalahan encrypting token
 
+		token, err := bcrypt.GenerateFromPassword([]byte(creds.Username), 10)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+		}
 		// TODO: answer here
 
 		// Task: Set token string kedalam cookie response
-
+		http.SetCookie(w, &http.Cookie{
+			Name:  cookieName,
+			Value: string(token),
+		})
 		// TODO: answer here
 	})
 
