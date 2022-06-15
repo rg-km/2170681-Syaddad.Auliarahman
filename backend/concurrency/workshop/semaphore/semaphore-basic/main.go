@@ -40,6 +40,8 @@ func main() {
 	}
 	//kapan terjadi blocking pada program ini ?
 	// TODO: answer here
+	//karena kita menggunakan semaphore
+	//kita tidak bisa mengakses longRunningProcess(i) lebih dari 10 kali
 }
 
 func longRunningProcess(taskID int) {
