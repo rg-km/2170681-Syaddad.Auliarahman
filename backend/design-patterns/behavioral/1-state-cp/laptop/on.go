@@ -7,7 +7,7 @@ type On struct {
 
 func (o On) Press() {
 	o.Laptop.CurrentState = "Off"
-	o.Laptop.ChangeState(Off{o.Laptop})
+	o.Laptop.ChangeState(&Off{o.Laptop})
 }
 
 func (o On) CanTurnOnLaptop() bool {
@@ -16,4 +16,6 @@ func (o On) CanTurnOnLaptop() bool {
 
 func (o On) Sleep() {
 	// TODO: answer here
+	o.Laptop.CurrentState = "Sleeping"
+	o.Laptop.ChangeState(&Sleeping{o.Laptop})
 }
