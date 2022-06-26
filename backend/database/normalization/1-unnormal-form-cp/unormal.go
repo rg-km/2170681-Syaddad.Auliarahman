@@ -38,14 +38,35 @@ func Migrate() (*sql.DB, error) {
 		panic(err)
 	}
 
+<<<<<<< HEAD
+	// sqlStmt := `CREATE TABLE ... ;` // TODO: replace this
+	sqlStmt := `CREATE TABLE IF NOT EXISTS unormal (
+		no_bon VARCHAR(50),
+		nama_barang VARCHAR(50),
+		harga INTEGER,
+		jumlah INTEGER,
+		biaya INTEGER,
+		sub_total INTEGER,
+		discount INTEGER,
+		total INTEGER, 
+		bayar INTERGER,
+		kembalian INTEGER,
+		kasir VARCHAR(50),
+		tanggal date,
+		waktu time
+		);`
+=======
 	sqlStmt := `CREATE TABLE unormal ... ;` // TODO: replace this
+>>>>>>> 8eeb6428f7534365f78113449910a139f167243c
 
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
 		return nil, err
 	}
 
-	_, err = db.Exec(`INSERT INTO ... VALUES ... ;`) // TODO: replace this
+	_, err = db.Exec(`INSERT INTO unormal (no_bon,nama_barang,harga,jumlah,biaya,sub_total,discount,total,bayar,kembalian,kasir,tanggal,waktu) VALUES 
+	("00001", "Disket,Refil Tinta,CD Blank,Mouse", "4500,22500,1500,17500","3,1,4,2","13500,22500,6000,35000",77000, 0, 77000, 100000,23000,"Rosi","04-05-2022","12:00:00"),
+	("00002", "Disket,Mouse,Flash Disk", "4500,17500,100000","1,1,1", "4500,17500,100000",122000,0,122000,122000,0,"Dewi","04-05-2022"	, "12:00:00");`)
 
 	if err != nil {
 		panic(err)
@@ -63,7 +84,7 @@ func checkDataExists(noBon string) (bool, error) {
 		panic(err)
 	}
 
-	sqlStmt := `SELECT ... FROM ... WHERE ... = ?;` // TODO: replace this
+	sqlStmt := `SELECT no_bon FROM unormal ORDER BY no_bon DESC LIMIT 1;` // TODO: replace this
 
 	row := db.QueryRow(sqlStmt, noBon)
 	var latestId int

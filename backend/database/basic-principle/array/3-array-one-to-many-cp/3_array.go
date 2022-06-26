@@ -61,11 +61,22 @@ func (db *UserTable) InsertUser(name string, age int) {
 }
 
 func (db *PhoneTable) WherePhone(id int) *PhoneRow {
+	for _, row := range *db {
+		if row.ID == id {
+			return &row
+		}
+	}
+	return nil
 	// TODO: answer here
 }
 
 func (db *UserTable) GetUser(userID int) UserRow {
 	var result UserRow
+	for _, row := range *db {
+		if row.ID == userID {
+			result = row
+		}
+	}
 	// TODO: answer here
 	return result
 }
