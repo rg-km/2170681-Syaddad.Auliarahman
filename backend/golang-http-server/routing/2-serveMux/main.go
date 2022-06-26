@@ -1,13 +1,18 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 )
 
+type AuthErrorResponse struct {
+	Error string `json:"error"`
+}
+
 func main() {
 	indexHandler := func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("index"))
+		json.NewEncoder(w).Encode(AuthErrorResponse{Error: "No token provided"})
 	}
 
 	helloHandler := func(w http.ResponseWriter, r *http.Request) {
