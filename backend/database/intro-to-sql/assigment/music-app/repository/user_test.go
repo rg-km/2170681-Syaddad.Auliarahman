@@ -2,7 +2,6 @@ package repository
 
 import (
 	"database/sql"
-	"os"
 
 	_ "github.com/mattn/go-sqlite3"
 	. "github.com/onsi/ginkgo/v2"
@@ -42,6 +41,7 @@ var _ = Describe("User", func() {
 		if err != nil {
 			panic(err)
 		}
+<<<<<<< HEAD
 
 		_, err = db.Exec(`DROP TABLE users`)
 		if err != nil {
@@ -49,6 +49,12 @@ var _ = Describe("User", func() {
 		}
 
 		os.Remove("./music-app.db")
+=======
+		_, err = db.Exec("DROP TABLE IF EXISTS users")
+		if err != nil {
+			panic(err)
+		}
+>>>>>>> 8b20712b3b3949948497a42bbd375e95156c7b23
 	})
 
 	usersData := map[int]*model.User{

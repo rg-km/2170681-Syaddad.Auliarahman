@@ -95,7 +95,18 @@ func Migrate() (*sql.DB, error) {
 		panic(err)
 	}
 
+<<<<<<< HEAD
+	sqlStmt = `CREATE TABLE surrogate_table_cp (
+		id INTEGER PRIMARY KEY, 
+		registration_no Varchar(16),
+		name TEXT,
+		percentage FLOAT,
+		grade INTEGER,
+		national_rank INTEGER
+		)` // TODO: replace this
+=======
 	sqlStmt = `CREATE TABLE surrogate_table_cp ...` // TODO: replace this
+>>>>>>> 8eeb6428f7534365f78113449910a139f167243c
 
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
@@ -103,7 +114,22 @@ func Migrate() (*sql.DB, error) {
 	}
 
 	//Masukkan data dua sekolah sebelumnya ke table ini
+<<<<<<< HEAD
+	_, err = db.Exec(`INSERT INTO surrogate_table_cp VALUES 
+	(1,"sekolah1","SMA Negeri 1", 0.5, "A", 457),
+	(2,"sekolah2", "SMA Negeri 2", 0.5, "A", 124),
+	(3,"sekolah3", "SMA Negeri 3", 0.5, "B", 789),
+	(4,"sekolah4", "SMA Negeri 4", 0.5, "B", 987),
+	(5,"sekolah5", "SMA Negeri 5", 0.5, "B", 1024),
+	(6,"1000", "SMA Negeri 6", 0.5, "", ""),
+	(7,"2000", "SMA Negeri 7", 0.5, "", ""),
+	(8,"3000", "SMA Negeri 8", 0.5, "", ""),
+	(9,"4000", "SMA Negeri 9", 0.5, "", ""),
+	(10,"5000", "SMA Negeri 10", 0.5, "", "")
+	;`) // TODO: replace this
+=======
 	_, err = db.Exec(`INSERT INTO surrogate_table_cp .... ;`) // TODO: replace this
+>>>>>>> 8eeb6428f7534365f78113449910a139f167243c
 
 	if err != nil {
 		panic(err)
