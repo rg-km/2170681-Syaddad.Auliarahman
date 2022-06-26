@@ -15,9 +15,24 @@ type House struct {
 
 type HouseBuilder interface {
 	// TODO: answer here
+	buildWindow(NumOfWindows int)
+	buildDoor()
+	buildGarage()
+	buildSwimmingPool()
 	getHouse() House
 }
 
 func NewBuilder(builderType string) HouseBuilder {
-	return nil // TODO: replace this
+	// return nil // TODO: replace this
+	if builderType == "indonesia" {
+		return &indonesiaHouseBuilder{}
+	}
+	if builderType == "zimbabwe" {
+		return &zimbabweHouseBuilder{
+			house: House{
+				HasSwimmingPool: false,
+			},
+		}
+	}
+	return nil
 }
